@@ -9,7 +9,7 @@ const {CreateReceitaService} = require("./../services/Receitas/CreateReceitaServ
     }
     async function UpdateHandle(req, res) {
         const {id,nome,email,senha} = req.body;
-        const service = new UpdateUsuarioService();
+        const service = new UpdateReceitaioService();
         res.send( await service.execute(id,nome,email,senha));
     }
     async function ListHandle(req, res) {

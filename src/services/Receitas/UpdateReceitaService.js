@@ -3,7 +3,7 @@ const Prisma = require('../../../db/prisma');
 class UpdateReceitaService {
 
     async execute(id,name,email,senha){
-      return  await Prisma.usuario.update({
+      return  await Prisma.receitas.update({
         where:{id},
         data:{
             name,

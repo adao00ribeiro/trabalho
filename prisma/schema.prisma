@@ -16,6 +16,7 @@ model usuario{
   name String
   email String
   senha String
+  receitas receita[]
 }
 
 model receita{
@@ -23,4 +24,6 @@ model receita{
   nome String
   descricao String
   tempodepreparo Int
+  usuarioId      Int
+  usuario        usuario  @relation(fields: [usuarioId], references: [id])
 }
