@@ -17,3 +17,10 @@ model usuario{
   email String
   senha String
 }
+
+model receita{
+  id Int @id @default(autoincrement())
+  nome String
+  descricao String
+  tempodepreparo Int
+}
