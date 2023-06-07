@@ -3,7 +3,7 @@ const Router = express.Router;
 const router = Router();
 const IsAuthenticated = require("./middlewares/IsAuthenticated")
 const UsuarioController = require('./controllers/UsuarioController');
-const {CreateHandle} = require('./controllers/ReceitaController');
+const {CreateHandle,ListHandle,DeleteHandle} = require('./controllers/ReceitaController');
 const AuthController = require('./controllers/AuthController');
 
 
@@ -22,21 +22,16 @@ router.delete('/usuarios',controller.DeleteHandle);
 //session 
 router.post('/session', authcontroller.handle)
 //receita
-router.post('/receitas', IsAuthenticated, CreateHandle);
+router.post('/receitas',  CreateHandle);
 
-router.get('/receitas', (req , res)=>{
-    res.send({
-        session :"receita get"
-    })
-})
+router.get('/receitas',ListHandle);
+
 router.put('/receitas', (req , res)=>{
     res.send({
         session :"receita put"
     })
 })
-router.delete('/receitas', (req , res)=>{
-    res.send({
-        session :"receita delete"
-    })
-})
+router.delete('/receitas', DeleteHandle)
+
+
 module.exports = router;

@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 
  function IsAuthenticated(req, res, next) {
+
     const authtoken = req.headers.authorization;
+    
     if (!authtoken) {
         return res.status(401).send("NAO AUTORIZADO").end();
     }

@@ -1,9 +1,9 @@
 const Prisma = require('../../../db/prisma');
-
-class ListReceitaService {
-    async execute(){
-      return  await Prisma.usuario.findMany();
+    async function ListReceitasServices(usuarioId){
+      return await Prisma.receita.findMany({
+        where: {
+          usuarioId:Number.parseInt(usuarioId)
+        }}
+      );
     }
-}
-
-module.exports = ListUsuarioService;
+    module.exports = {ListReceitasServices};

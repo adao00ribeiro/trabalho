@@ -1,19 +1,28 @@
 const Prisma = require('../../../db/prisma');
 
-class DeleteReceitaService {
-    async execute(id){
+
+    async function DeleteReceitaService(id){
      
-      const usuario = await  Prisma.usuario.findUnique({
-        where: { id }
+      const receitas = await  Prisma.receita.findMany({
+        where: { usuarioId : 5 }
       });
-    
-      if (!usuario) {
-        throw new Error('Usuário não encontrado');
+ 
+      if (!receitas) {
+        throw new Error('Usuário não tem nenhuma receita cadastrada');
       }
-      return   Prisma.usuario.delete({
-        where:{id}
+    const rece =    receitas.filter(element => {
+        return element.id == id;
+      });
+
+      if(rece.length==0){
+        throw new Error('receita nao pertence a esse usuario');
+      }
+
+      return await Prisma.receita.delete({
+        where:{id : Number.parseInt(id)}
       });
     }
-}
 
-module.exports = DeleteUsuarioService;
+module.exports = {
+  DeleteReceitaService
+};

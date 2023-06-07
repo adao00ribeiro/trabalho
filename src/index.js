@@ -13,13 +13,13 @@ server.use(routes);
 
 server.use((err, req, res, next) => {
     if(err instanceof Error){
-       return res.json("erro")
+       return res.json(err.message)
     }
     return res.status(500).json({
         status: "error",
         message: "internal server error"
     })
-  
+
 })
 server.listen(porta,()=>{
     console.log("SERVIDOR INICIADO");
