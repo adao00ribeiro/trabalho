@@ -1,17 +1,16 @@
 const Prisma = require('../../../db/prisma');
 
-class UpdateReceitaService {
-
-    async execute(id,name,email,senha){
-      return  await Prisma.receitas.update({
-        where:{id},
+    async function UpdateReceitaService(id,nome,descricao,tempodepreparo){
+      return await Prisma.receita.update({
+        where:{id:id},
         data:{
-            name,
-            email,
-            senha
+         
+          nome:nome,
+          descricao:descricao,
+          tempodepreparo:Number.parseInt(tempodepreparo),
+         
         }
       });
     }
-}
 
-module.exports = UpdateUsuarioService;
+module.exports = {UpdateReceitaService};

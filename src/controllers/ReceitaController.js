@@ -1,16 +1,17 @@
 const {CreateReceitaService} = require("./../services/Receitas/CreateReceitaService")
 const {ListReceitasServices} = require("./../services/Receitas/ListReceitaService")
 const {DeleteReceitaService} = require("./../services/Receitas/DeleteReceitaService")
-
+const {UpdateReceitaService} = require("./../services/Receitas/UpdateReceitaService")
 
     async function CreateHandle(req, res) {
         const {nome,descricao,tempodepreparo,usuarioId} = req.body;
         res.send( await CreateReceitaService(nome,descricao,tempodepreparo,usuarioId));
     }
     async function UpdateHandle(req, res) {
-        const {id,nome,email,senha} = req.body;
-        const service = new UpdateReceitaioService();
-        res.send( await service.execute(id,nome,email,senha));
+        const {id,nome,descricao,tempodepreparo} = req.body;
+
+      
+        res.send( await UpdateReceitaService(id,nome,descricao,tempodepreparo));
     }
     async function ListHandle(req, res) {
         const {usuarioId} = req.query;
@@ -24,5 +25,6 @@ const {DeleteReceitaService} = require("./../services/Receitas/DeleteReceitaServ
 module.exports = {
     CreateHandle,
     ListHandle,
+    UpdateHandle,
     DeleteHandle
 };
