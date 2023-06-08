@@ -2,6 +2,7 @@
 const express = require('express');
 
 const routes = require('./routes');
+const NotFoundError = require('./middlewares/NotFoundError');
 //---------------------------------------------------
 const server = express();
 const porta = 8080;
@@ -12,10 +13,10 @@ server.use(routes);
 //-----------------
 
 server.use((err, req, res, next) => {
-    if(err instanceof Error){
-       return res.json(err.message)
+    if(err instanceof NotFoundError){
+        res.status(404).json(err.message)
     }
-    return res.status(500).json({
+     res.status(500).json({
         status: "error",
         message: "internal server error"
     })

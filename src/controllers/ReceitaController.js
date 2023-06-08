@@ -3,23 +3,40 @@ const {ListReceitasServices} = require("./../services/Receitas/ListReceitaServic
 const {DeleteReceitaService} = require("./../services/Receitas/DeleteReceitaService")
 const {UpdateReceitaService} = require("./../services/Receitas/UpdateReceitaService")
 
-    async function CreateHandle(req, res) {
+    async function CreateHandle(req, res,next) {
         const {nome,descricao,tempodepreparo,usuarioId} = req.body;
-        res.send( await CreateReceitaService(nome,descricao,tempodepreparo,usuarioId));
+        try {
+            res.send( await CreateReceitaService(nome,descricao,tempodepreparo,usuarioId));
+        } catch (error) {
+            next(error)
+        }
+       
     }
-    async function UpdateHandle(req, res) {
+    async function UpdateHandle(req, res,next) {
         const {id,nome,descricao,tempodepreparo} = req.body;
-
-      
-        res.send( await UpdateReceitaService(id,nome,descricao,tempodepreparo));
+        try {
+            res.send( await UpdateReceitaService(id,nome,descricao,tempodepreparo));
+        } catch (error) {
+            next(error)
+        }
     }
-    async function ListHandle(req, res) {
+    async function ListHandle(req, res,next) {
         const {usuarioId} = req.query;
-        res.send( await ListReceitasServices(usuarioId));
+     
+
+        try {
+            res.send( await ListReceitasServices(usuarioId));
+        } catch (error) {
+            next(error)
+        }
     }
-    async function DeleteHandle(req, res) {
+    async function DeleteHandle(req, res,next) {
         const {id} = req.query;
-        return res.send( await DeleteReceitaService(id));
+        try {
+            return res.send( await DeleteReceitaService(id));
+        } catch (error) {
+            next(error)
+        }
     }
 
 module.exports = {

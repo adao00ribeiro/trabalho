@@ -6,7 +6,6 @@ const Prisma = require('./../../../db/prisma');
       const usuario =  await Prisma.usuario.findFirst({
         where: { email:email }
       });
-
       return usuario;
     }
 }

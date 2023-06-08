@@ -1,17 +1,20 @@
+const NotFoundError = require('../../middlewares/NotFoundError');
 const Prisma = require('./../../../db/prisma');
 
 class DeleteUsuarioService {
     async execute(id){
-
+      console.log(id)
       const usuario = await  Prisma.usuario.findUnique({
         where: { id:id }
       });
     
       if (!usuario) {
-        throw new Error('Usuário não encontrado');
+        throw new NotFoundError('Usuário não encontrado');
       }
-      return  await Prisma.usuario.delete({
-        where:{id}
+      return await Prisma.usuario.delete({
+        where:{
+          id:id
+        }
       });
     }
 }

@@ -30,7 +30,6 @@ const jwt = require('jsonwebtoken');
                 expiresIn: '30d'
             }
         )
-
         return {
             token: token
         }

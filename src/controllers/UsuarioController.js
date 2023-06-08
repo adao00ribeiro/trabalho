@@ -5,24 +5,42 @@ const CreateUsuarioService = require("./../services/Usuarios/CreateUsuarioServic
 
 class UserController  {
 
-    async CreateHandle(req, res) {
-        const {nome,email,senha} = req.body;
-        const service = new CreateUsuarioService();
-        res.send( await service.execute(nome,email,senha));
+    async CreateHandle(req, res,next) {
+        const {name,email,senha} = req.body;
+        try {
+            const createUsuarioService = new CreateUsuarioService();
+            const usuario = await createUsuarioService.execute(name, email, senha);
+            res.send(usuario);
+        } catch (error) {
+            next(error); // Passa o erro para o próximo middleware de tratamento de erros
+        }
     }
-    async UpdateHandle(req, res) {
+    async UpdateHandle(req, res,next) {
         const {id,nome,email,senha} = req.body;
-        const service = new UpdateUsuarioService();
-        res.send( await service.execute(id,nome,email,senha));
+        try {
+            const service = new UpdateUsuarioService();
+            res.send( await service.execute(id,nome,email,senha));
+        } catch (error) {
+            next(error); // Passa o erro para o próximo middleware de tratamento de erros
+        }
     }
-    async ListHandle(req, res) {
-       const service = new ListUsuarioService();
-        res.send( await service.execute());
+    async ListHandle(req, res,next) {
+      
+        try {
+            const service = new ListUsuarioService();
+            res.send( await service.execute());
+        } catch (error) {
+            next(error); // Passa o erro para o próximo middleware de tratamento de erros
+        }
     }
-    async DeleteHandle(req, res) {
+    async DeleteHandle(req, res,next) {
         const {id} = req.body;
-        const service = new DeleteUsuarioService();
-        res.send( await service.execute(id));
+        try {
+            const service = new DeleteUsuarioService();
+            res.send( await service.execute(id));
+        } catch (error) {
+            next(error); // Passa o erro para o próximo middleware de tratamento de erros
+        }
     }
 }
 

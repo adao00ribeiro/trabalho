@@ -17,9 +17,9 @@ router.delete('/usuarios',controller.DeleteHandle);
 //session 
 router.post('/session', authcontroller.handle)
 //receita
-router.post('/receitas',  CreateHandle);
-router.get('/receitas',ListHandle);
-router.put('/receitas',UpdateHandle)
-router.delete('/receitas', DeleteHandle)
+router.post('/receitas',IsAuthenticated,CreateHandle);
+router.get('/receitas',IsAuthenticated,ListHandle);
+router.put('/receitas',IsAuthenticated,UpdateHandle)
+router.delete('/receitas',IsAuthenticated, DeleteHandle)
 
 module.exports = router;
